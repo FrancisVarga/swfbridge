@@ -2,16 +2,15 @@ package swf.bridge {
 	import flash.net.Socket;
 	import flash.utils.Dictionary;
 
-	/***
+	/**
 	 * The Core Requestor allows access to core parts of Fdt. Currently not used. 
 	 */
 	public class FdtCoreRequestor {
 		private var _bridge : AbstractFdtBridge;
 		private var _bridgeSocket : Socket;
 
-		/***
-		 * This constructor may change in future, please use the accessors of the
-		 * bridge to get a requestor and do not use this constructor 
+		/**
+		 * Don't use directly. Instead, use <code>Requestor</code> accessors of the bridge to get a requestor. 
 		 */
 		public function FdtCoreRequestor(abstractFdtBridge : AbstractFdtBridge) {
 			_bridge = abstractFdtBridge;

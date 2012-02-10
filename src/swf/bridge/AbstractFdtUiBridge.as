@@ -3,25 +3,16 @@ package swf.bridge {
 
 	import flash.display.LoaderInfo;
 
-	/***
-	 * Please do not use this class. It is for internal use.
-	 */
+	/** @private **/
 	public class AbstractFdtUiBridge extends AbstractFdtBridge {
 		private var _swfUiPlugin : ISwfWindowPlugin;
 
-		/***
-		 * This constructor may change in future, please use 
-		 * <code>FdtViewBridge</code>, <code>FdtDialogBridge</code>, or <code>IFdtActionBrige</code>
-		 * to get access to the requestors. 
-		 */
 		public function AbstractFdtUiBridge(loaderInfo : LoaderInfo, swfUiPlugin : ISwfWindowPlugin) {
 			super(loaderInfo, swfUiPlugin);
 			_swfUiPlugin = swfUiPlugin;
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		/** @private **/
 		override protected function readExtendedMessage(messageID : int) : void {
 			if (messageID < 4000) {
 				readBaseUiMessage(messageID);
@@ -50,28 +41,20 @@ package swf.bridge {
 			}
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		/** @private **/
 		protected function callEntryAction(entryId : String) : void {
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		/** @private **/
 		protected function dialogClosed(callerInstanceId : String, dialogInstanceId : String, result : String) : void {
 			_swfUiPlugin.dialogClosed(dialogInstanceId, result);
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		/** @private **/
 		protected function readExtendedUiMessage(messageID : int) : void {
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		/** @private **/
 		internal function baseOpened(width : int, height : int) : void {
 			_swfUiPlugin.setSize(width, height);
 		}

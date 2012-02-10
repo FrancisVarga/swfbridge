@@ -3,14 +3,14 @@ package swf.bridge {
 
 	import flash.display.LoaderInfo;
 
-	/***
+	/**
 	 * The Fdt View Bridge establishs a connection to Fdt for Swf View(s) Plugins.
 	 * Every Swf View(s) Plugin should instantiate ONE <code>FdtViewBridge</code>.
 	 */
 	public final class FdtViewBridge extends AbstractFdtWindowBridge {
 		private var _swfViewPlugin : ISwfViewPlugin;
 
-		/***
+		/**
 		 * Use this constructor to create a new View Bridge for your Swf View(s) Plugin
 		 * 
 		 * @param loaderInfo the loaderInfo of the current swf
@@ -22,10 +22,8 @@ package swf.bridge {
 			super(loaderInfo, swfViewPlugin);
 			_swfViewPlugin = swfViewPlugin;
 		}
-
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		
+		/** @private **/
 		override protected function initPlugin() : void {
 			_swfViewPlugin.init();
 		}

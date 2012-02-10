@@ -1,23 +1,22 @@
 package swf.bridge {
 	import flash.net.Socket;
 
-	/***
-	 * The Editor Requestor allows access to editors of Fdt. 
+	/**
+	 * Editor Requestors allow access to FDT's open editors. 
 	 */
 	public class FdtEditorRequestor {
 		private var _bridge : AbstractFdtBridge;
 		private var _bridgeSocket : Socket;
 
-		/***
-		 * This constructor may change in future, please use the accessors of the
-		 * bridge to get a requestor and do not use this constructor 
+		/**
+		 * Don't use directly. Instead, use <code>Requestor</code> accessors of the bridge to get a requestor. 
 		 */
 		public function FdtEditorRequestor(bridge : AbstractFdtBridge) {
 			_bridge = bridge;
 			_bridgeSocket = bridge.bridgeSocket;
 		}
 
-		/***
+		/**
 		 * Selects a document part in an editor. 
 		 * The request returns <code>true</code> if the selection could be set, otherwise <code>false</code>
 		 * 
@@ -38,7 +37,7 @@ package swf.bridge {
 			});
 		}
 
-		/***
+		/**
 		 * Opens an editor for a file. 
 		 * The request returns <code>true</code> if the file could be opened, otherwise <code>false</code>
 		 * 
@@ -55,7 +54,7 @@ package swf.bridge {
 			});
 		}
 
-		/***
+		/**
 		 * The request returns the editor context of the current selected editor or <code>null</code>
 		 * if no editor has been focused.  
 		 */
@@ -68,10 +67,8 @@ package swf.bridge {
 				_bridgeSocket.flush();
 			});
 		}
-
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		
+		/** @private **/
 		internal function readEditorContext() : FdtEditorContext {
 			var pc : FdtEditorContext = new FdtEditorContext();
 			pc.currentFile = _bridgeSocket.readUTF();

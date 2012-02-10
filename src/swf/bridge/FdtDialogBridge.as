@@ -4,7 +4,7 @@ package swf.bridge {
 	import flash.display.LoaderInfo;
 	import flash.net.Socket;
 
-	/***
+	/**
 	 * The Fdt Dialog Bridge establishs a connection to Fdt for Swf Dialog Plugins.
 	 * Every Swf Dialog Plugin should instantiate ONE <code>FdtDialogBridge</code>.
 	 */
@@ -30,14 +30,14 @@ package swf.bridge {
 			return;
 		}
 
-		/***
+		/**
 		 * Returns the systemwide unique instance id of the caller plugin (A Dialog, Action or View(s) Plugin).
 		 */
 		public function get callerInstanceId() : String {
 			return _callerInstanceId;
 		}
 
-		/***
+		/**
 		 * Closes the current Swf Dialog Plugin and transfers the result to the caller plugin.
 		 * 
 		 * @param result result string transfered to the caller plugin  

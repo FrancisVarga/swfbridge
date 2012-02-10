@@ -1,5 +1,6 @@
 package swf.bridge {
-	/**
+	/*
+	 * 	
 	 * <p>When you want FDT to execute a behaviour, you create a request, add a function to it and then send it to the SWFBridge to be executed.
 	 * While each request only takes one function as an arugument, multiple requests can be submitted at once.</p>
 	 * 
@@ -23,7 +24,7 @@ package swf.bridge {
 	public class FdtRequest {
 		private var _make : Function;
 
-		/***
+		/**
 		 * <p>FDTRequests are not directly instanciated. Instead, create requests via the bridge instance that is provided in the <code>init</code> menthod.</p>
 		 */
 		public function FdtRequest(make : Function = null) {
@@ -69,7 +70,7 @@ package swf.bridge {
 			_make = null;
 		}
 
-		/***
+		/**
 		 * Extends this request with another one.
 		 * @param request the other request
 		 * 

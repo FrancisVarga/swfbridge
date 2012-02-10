@@ -1,35 +1,36 @@
 package swf.bridge {
-	/***
+	/**
 	 * The editor context describes the current focused editor and its selection (cursor).
 	 */
 	public class FdtEditorContext {
-		/***
-		 * the file of the current editor 
+		/**
+		 * The file of associated with the currently active editor. 
 		 */
 		public var currentFile : String;
 		
-		/***
-		 * the line of the selection start of the editor document
+		/**
+		 * This is the current line of which the cursor is at. 
+		 * It is relative to thof the selection start of the current document.
 		 */
 		public var currentLine : String;
 		
-		/***
-		 * the offset of the line containing the selection start
+		/**
+		 * Within the current line, this is the offset (distance) from the start of the line to the cursor.
 		 */
 		public var currentLineOffset : int;
 		
-		/***
-		 * the offset of the selection start
+		/**
+		 * Within the current line, this is the offset (distance) from the start of the line to the beginning of the selection.
 		 */
 		public var selectionOffset : int;
 		
-		/***
-		 * the selection length 
+		/**
+		 * The length of the currently active selection. 
 		 */
 		public var selectionLength : int;
 		
-		/***
-		 * the line seperator of the current line 
+		/**
+		 * The line seperator of the current line 
 		 */
 		public var currentLineSeperator : String;
 	}

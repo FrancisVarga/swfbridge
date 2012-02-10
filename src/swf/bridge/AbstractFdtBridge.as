@@ -181,44 +181,50 @@ package swf.bridge {
 			return _bridgeSocket;
 		}
 
-		/***
-		 * Allows access to the core of FDT. 
+		/**
+		 * Allows access to the core of FDT.
+		 * @return FdtCoreRequestor
 		 */
 		public function get core() : FdtCoreRequestor {
 			return _coreRequestor;
 		}
 
-		/***
+		/**
 		 * Use this to gain access to the workspace FDT is currently running in.
+		 * @return FdtWorkspaceRequestor
 		 */
 		public function get workspace() : FdtWorkspaceRequestor {
 			return _workspaceRequestor;
 		}
 
-		/***
+		/**
 		 * Use this requestor to access model functions
+		 * @return FdtModelRequestor
 		 */
 		public function get model() : FdtModelRequestor {
 			return _modelRequestor;
 		}
 
-		/***
+		/**
 		 * Use this requestor to access FDT's editors and their functions.
+		 * @return FdtEditorRequestor
 		 */
 		public function get editor() : FdtEditorRequestor {
 			return _editorRequestor;
 		}
 
-		/***
+		/**
 		 * The instance id of the swf bridge. This id is unique among 
 		 * all bridges to fdt.
+		 * @return String
 		 */
 		public function get instanceId() : String {
 			return _instanceId;
 		}
 
-		/***
-		 * Creates a new request. 
+		/**
+		 * Creates a new request.
+		 *  @return FdtRequest
 		 */
 		public function newRequest() : FdtRequest {
 			return new FdtRequest();

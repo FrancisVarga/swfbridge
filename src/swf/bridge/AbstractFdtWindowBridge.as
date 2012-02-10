@@ -3,8 +3,8 @@ package swf.bridge {
 
 	import flash.display.LoaderInfo;
 
-	/***
-	 * Please use this class only indirect via
+	/**
+	 * Another abstract class. Please use this class only indirect via
 	 * <code>FdtViewBridge</code> or <code>FdtDialogBridge</code>. 
 	 */
 	public class AbstractFdtWindowBridge extends AbstractFdtUiBridge {
@@ -12,11 +12,7 @@ package swf.bridge {
 		private var _windowRequestor : FdtWindowRequestor;
 		private var _uiRequestor : FdtUiRequestor;
 
-		/***
-		 * This constructor may change in future, please use 
-		 * <code>FdtViewBridge</code> or <code>FdtDialogBridge</code>
-		 * to get access to the requestors. 
-		 */
+		/** @private **/
 		public function AbstractFdtWindowBridge(loaderInfo : LoaderInfo, swfWindowPlugin : ISwfWindowPlugin) {
 			super(loaderInfo, swfWindowPlugin);
 			_swfWindowPlugin = swfWindowPlugin;
@@ -24,14 +20,14 @@ package swf.bridge {
 			_uiRequestor = new FdtUiRequestor(this);
 		}
 
-		/***
+		/**
 		 * Use this requestor to access window functions. 
 		 */
 		public function get window() : FdtWindowRequestor {
 			return _windowRequestor;
 		}
 		
-		/***
+		/**
 		 * Use this requestor to access ui functions. 
 		 */
 		public function get ui() : FdtUiRequestor {

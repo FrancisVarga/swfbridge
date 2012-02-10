@@ -109,33 +109,32 @@ package swf.bridge {
 
 	import flash.net.Socket;
 
-	/***
+	/**
 	 * The Model Requestor allows access to models of Fdt. 
 	 */
 	public class FdtModelRequestor {
 		private var _bridge : AbstractFdtBridge;
 		private var _bridgeSocket : Socket;
 
-		/***
-		 * This constructor may change in future, please use the accessors of the
-		 * bridge to get a requestor and do not use this constructor 
+		/**
+		 * Don't use directly. Instead, use <code>Requestor</code> accessors of the bridge to get a requestor. 
 		 */
 		public function FdtModelRequestor(bridge : AbstractFdtBridge) {
 			_bridge = bridge;
 			_bridgeSocket = bridge.bridgeSocket;
 		}
 
-		/***
+		/**
 		 * Modifies a document. The request returns an integer describing the status:
 		 * <br><br>
-		 *     0 indicates success <br>
-		 *     1 indicates overlapping of the text edits <br>
-		 *     2 indicates some offsets or length are not valid in the document <br> <br>
+		 *     0 Indicates success <br>
+		 *     1 Indicates overlapping of the text edits <br>
+		 *     2 Indicates some offsets or length are not valid in the document <br> <br>
 		 *   
 		 * 
-		 * @param path the file document which should be modified (the document currently in memory)
-		 * @param textEdits the changes to apply to the document (they are not allowed to overlap) 
-		 * @param writeToFile after application of the changes the document is written to file system 
+		 * @param Path the file document which should be modified (the document currently in memory)
+		 * @param TextEdits the changes to apply to the document (they are not allowed to overlap) 
+		 * @param WriteToFile after application of the changes the document is written to file system 
 		 * 		(default is <code>false</code>). In case you try to modify a not open file use <code>true</code>
 		 * 		It is recommended not change files of unsave editors for good user experience.
 		 * 		Also it is recommended to ask the user to accept changes to the file system.   
@@ -162,7 +161,7 @@ package swf.bridge {
 			_bridgeSocket.writeUTF(fte.text);
 		}
 
-		/***
+		/**
 		 * Request the abstract syntax tree of an .as, .mxml, or .fxg file. 
 		 * The request returns the root of the ast of the file. 
 		 * 
@@ -1255,7 +1254,7 @@ package swf.bridge {
 		}
 
 		private function readChildren() : Vector.<IFdtAstNode> {
-			var children : Vector.<IFdtAstNode> = new Vector.<IFdtAstNode>()
+			var children : Vector.<IFdtAstNode> = new Vector.<IFdtAstNode>();
 			var id : int = _bridgeSocket.readShort();
 			trace("Start reading children");
 			if (id != 254) {

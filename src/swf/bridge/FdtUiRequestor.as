@@ -2,7 +2,7 @@ package swf.bridge {
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
 
-	/***
+	/**
 	 * The Ui Requestor allows access to ui parts of Fdt. 
 	 */
 	public final class FdtUiRequestor {
@@ -11,9 +11,8 @@ package swf.bridge {
 		private var _idPrefix : String;
 		private var _standardCloseRequestHandler : Function;
 
-		/***
-		 * This constructor may change in future, please use the accessors of the
-		 * bridge to get a requestor and do not use this constructor 
+		/**
+		 * Don't use directly. Instead, use <code>Requestor</code> accessors of the bridge to get a requestor. 
 		 */
 		public function FdtUiRequestor(bridge : AbstractFdtUiBridge, idPrefix : String = "") {
 			_bridge = bridge;
@@ -22,7 +21,7 @@ package swf.bridge {
 			trace("IdPrefix: " + idPrefix);
 		}
 
-		/***
+		/**
 		 * Registers an image which could be used as icon in several locations
 		 * (View Icon, Dialog Icon, Propsal Icon, Menu Entry Icon, ...) 
 		 * @param imageId the id used within the swf plugin to identify the image
@@ -44,7 +43,7 @@ package swf.bridge {
 			});
 		}
 
-		/***
+		/**
 		 * Registers a menu entry at some place in the in main menu of FDT.  
 		 * 
 		 * @param entryId the entry id to identify this entry within the swf plugin
@@ -68,7 +67,7 @@ package swf.bridge {
 			});
 		}
 
-		/***
+		/**
 		 * Registers a menu at some place in the in main menu of FDT.  
 		 * 
 		 * @param entryId the entry id to identify this menu within the swf plugin
@@ -91,7 +90,7 @@ package swf.bridge {
 			});
 		}
 
-		/***
+		/**
 		 * Opens a swf dialog plugin as dialog.    
 		 * 
 		 * The requests returns the new system wide unique dialog plugin instance id to allow

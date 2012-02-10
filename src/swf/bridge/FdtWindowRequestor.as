@@ -1,7 +1,7 @@
 package swf.bridge {
 	import flash.net.Socket;
 
-	/***
+	/**
 	 * The Window Requestor allows access to the window displaying the swf plugin.
 	 */
 	public final class FdtWindowRequestor {
