@@ -1,16 +1,30 @@
 package swf.bridge {
 	/**
-	 * A <code>FdtRequest</code> can be send over to FDT to trigger some functions 
-	 * in FDT. The results of these functions are collected and send to the function 
+	 * <p>When you want FDT to execute a behaviour, you create a request, add a function to it and then send it to the SWFBridge to be executed.
+	 * While each request only takes one function as an arugument, multiple requests can be submitted at once.</p>
+	 * 
+	 * <b>EXAMPLE:</b><br /><br /><code>
+	 * // In this examnple, we sent multiple requests to the SWFBridge to set some basic properties of our plugin.
+	 * public function init() : void { <br /><br />
+	 *  // This request will register an image with the SWFBrige. Before an image can be used (displayed), it must be registered so it can be held in memory.<br />
+	 * 	_bridge.ui.registerImage("DemoIcon", new _picture1()).sendTo(this,null);<br /><br />
+	 * 	// After an image is registered, you can use it in your plugin. This request tells the SWFBridge to set the registered graphic, "DemoIcon", as the icon for the view panel.<br />     
+	 * 	_bridge.window.setImage("DemoIcon").sendTo(this, null);<br /><br />
+	 * 	// This request sets the name of the view panel.<br />
+	 * 	_bridge.window.setName("Demo View").sendTo(this, null);<br /><br />
+	 * 	// This request sets description when the tooltip hover over is activated.<br />
+     * 	_bridge.window.setToolTip("Demo View").sendTo(this, null);<br /><br />
+	 * }<br />
+	 * </code>
+	 * <br />
+	 * The results of these functions are collected and send to the function 
 	 * given to the method <code>sendTo</code>.
 	 */
 	public class FdtRequest {
 		private var _make : Function;
 
 		/***
-		 * This constructor may change in future, please use 
-		 * <code>FdtViewBridge</code>, <code>FdtDialogBridge</code>, or <code>IFdtActionBrige</code>
-		 * or use thier requestors to create a FdtRequest.
+		 * <p>FDTRequests are not directly instanciated. Instead, create requests via the bridge instance that is provided in the <code>init</code> menthod.</p>
 		 */
 		public function FdtRequest(make : Function = null) {
 			if (make == null) {
@@ -22,8 +36,8 @@ package swf.bridge {
 			}
 		}
 
-		/***
-		 * Transfers the request to FDT and calls function <code>f</code>
+		/**
+		 * Transfers the request to FDT and calls the supplied function <code>f</code>
 		 * with the request result.
 		 * 
 		 * <pre>

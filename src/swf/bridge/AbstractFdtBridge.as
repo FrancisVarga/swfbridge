@@ -10,9 +10,14 @@ package swf.bridge {
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 
-	/***
-	 * Please use this class only indirect via
-	 * <code>FdtViewBridge</code> or <code>FdtDialogBridge</code>. 
+	/**
+	 * <p>This class provides base functionality for <code>FdtWindowRequestor</code>, <code>AbstractFdtWindowBridge</code>,
+	 * <code>FdtViewBridge</code> and <code>FdtDialogBridge</code>.</p> 
+	 * <p>As an abstract class, it is not to be instanciated directly.</p>
+	 * <p>Use <code>FdtViewBridge</code>, <code>FdtDialogBridge</code>, or <code>IFdtActionBrige</code>
+	 * to get access to the requestors.</p>
+	 * 
+	 * @author <a href="http://fdt.powerflasher.com/">FDT Team</a>
 	 */
 	public class AbstractFdtBridge {
 		private var _instanceId : String;
@@ -24,18 +29,12 @@ package swf.bridge {
 		private var _workspaceRequestor : FdtWorkspaceRequestor;
 		private var _editorRequestor : FdtEditorRequestor;
 		protected var _modelRequestor : FdtModelRequestor;
-		
 		protected var _parameters : Object;
 		protected var _swfPlugin : ISwfPlugin;
 		protected var _bridgeSocket : Socket;
-		protected var _lastStamp : int = -1; 
+		protected var _lastStamp : int = -1;
 		protected var _byteBuffer : ByteArray = new ByteArray();
 
-		/***
-		 * This constructor may change in future, please use 
-		 * <code>FdtViewBridge</code>, <code>FdtDialogBridge</code>, or <code>IFdtActionBrige</code>
-		 * to get access to the requestors. 
-		 */
 		public function AbstractFdtBridge(loaderInfo : LoaderInfo, swfPlugin : ISwfPlugin) {
 			_swfPlugin = swfPlugin;
 			_parameters = loaderInfo.parameters;
@@ -52,7 +51,7 @@ package swf.bridge {
 			_coreRequestor = new FdtCoreRequestor(this);
 			_workspaceRequestor = new FdtWorkspaceRequestor(this);
 			_modelRequestor = new FdtModelRequestor(this);
-			_editorRequestor = new FdtEditorRequestor(this);											
+			_editorRequestor = new FdtEditorRequestor(this);
 		}
 
 		private function bridgeSocketDataHandler(event : ProgressEvent) : void {
@@ -72,16 +71,16 @@ package swf.bridge {
 					}
 				}
 				if (_messageID > 20000) {
-					if (_messageID == 20002) {					
-					  	if (_lastStamp == -1) {
-							if (len >= 4){
-								len = len - 4;						
+					if (_messageID == 20002) {
+						if (_lastStamp == -1) {
+							if (len >= 4) {
+								len = len - 4;
 								_messageLen = _messageLen - 4;
-								_lastStamp = _bridgeSocket.readInt(); 
+								_lastStamp = _bridgeSocket.readInt();
 							} else {
 								return;
 							}
-					  	} 
+						}
 					}
 					var toRead : uint = Math.min(_messageLen, len);
 					if (toRead > 0) {
@@ -99,7 +98,6 @@ package swf.bridge {
 					len = len - _messageLen;
 					_messageID = -1;
 				}
-				//trace(len);
 			}
 		}
 
@@ -110,7 +108,7 @@ package swf.bridge {
 		private function ioErrorHandler(event : IOErrorEvent) : void {
 			trace("ioError: " + event);
 		}
-
+		
 		private function bridgeConnectHandler(event : Event) : void {
 			_bridgeSocket.writeByte(19);
 			_bridgeSocket.writeUTF(_instanceId);
@@ -118,20 +116,14 @@ package swf.bridge {
 			initPlugin();
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
 		protected function initPlugin() : void {
 		}
 
 		private function bridgeCloseHandler(event : Event) : void {
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
 		protected function readBufferedMessage(messageID : int) : void {
-			if (messageID == 20002){
+			if (messageID == 20002) {
 				readStampedLongMessage();
 			}
 		}
@@ -163,52 +155,41 @@ package swf.bridge {
 			_byteBuffer = new ByteArray();
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		/** @private **/
 		protected function readBaseMessage(messageID : int) : void {
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		/** @private **/
 		protected function readExtendedMessage(messageID : int) : void {
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
 		private static function getNextStamp() : int {
 			_stampCounter++;
 			return _stampCounter;
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		/** @private **/
 		internal function sendStampedMessage(messageId : int, thisObject : Object, receive : Function) : void {
 			var stamp : int = getNextStamp();
-			_stampMap[stamp] = { callObject : thisObject, method:receive};
+			_stampMap[stamp] = {callObject:thisObject, method:receive};
 			_bridgeSocket.writeShort(messageId);
 			_bridgeSocket.writeInt(stamp);
 		}
 
-		/***
-		 * Please do not use this function. It is for internal use. 
-		 */
+		/** @private **/
 		internal function get bridgeSocket() : Socket {
 			return _bridgeSocket;
 		}
 
 		/***
-		 * Use this requestor to access core functions
+		 * Allows access to the core of FDT. 
 		 */
 		public function get core() : FdtCoreRequestor {
 			return _coreRequestor;
 		}
 
 		/***
-		 * Use this requestor to access workspace functions
+		 * Use this to gain access to the workspace FDT is currently running in.
 		 */
 		public function get workspace() : FdtWorkspaceRequestor {
 			return _workspaceRequestor;
@@ -222,7 +203,7 @@ package swf.bridge {
 		}
 
 		/***
-		 * Use this requestor to access editor functions
+		 * Use this requestor to access FDT's editors and their functions.
 		 */
 		public function get editor() : FdtEditorRequestor {
 			return _editorRequestor;
@@ -231,9 +212,9 @@ package swf.bridge {
 		/***
 		 * The instance id of the swf bridge. This id is unique among 
 		 * all bridges to fdt.
-		 */		
+		 */
 		public function get instanceId() : String {
-			return _instanceId;			
+			return _instanceId;
 		}
 
 		/***
@@ -242,6 +223,5 @@ package swf.bridge {
 		public function newRequest() : FdtRequest {
 			return new FdtRequest();
 		}
-
 	}
 }
