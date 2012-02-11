@@ -1,5 +1,5 @@
 This repository is just getting started and will be worked on extensively over the next 2 weeks.
 
-This is the codebase which will provide the API for Flash developers, using AS3 / Flex, the ability to extend FDT with Quick Fixes, Quick Assits code generators and workspace supporting applicaitons such as FTP uploaders and asset viewers.
+This is the codebase which will provide the API for Flash developers, using AS3 / Flex, the ability to extend FDT with Quick Fixes, Quick Assits, code generators and workspace supporting applicaitons such as FTP uploaders and asset viewers.
 
 This API will allow developers to access everything about FDT, including our model, abstract syntax tree and anything in the workspace.
